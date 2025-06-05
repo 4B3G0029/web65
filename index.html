@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>購物車</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .product {
+      margin-bottom: 40px;
+      text-align: left; 
+    }
+
+    .product img {
+      width: 200px;
+      height: auto;
+      display: block;    
+      margin-bottom: 10px;
+    }
+
+    .price-cart {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    button {
+      padding: 5px 10px;
+    }
+
+    #total {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div>購物車總額: $<span id="total">0</span></div>
+    <button onclick="clearCart()">清空購物車</button>
+  </div>
+
+  <div class="product">
+    <img src="tw-11134207-7qukx-lg1wnbeih8u9e9.jpg" alt="商品1圖片">
+    <div class="price-cart">
+      <span>$100</span>
+      <button onclick="addToCart(100)">加入購物車</button>
+    </div>
+  </div>
+
+  <div class="product">
+    <img src="841255e2b03b7bbc89551367c0f9c364.jpg" alt="商品2圖片">
+    <div class="price-cart">
+      <span>$120</span>
+      <button onclick="addToCart(120)">加入購物車</button>
+    </div>
+  </div>
+
+  <script>
+    let total = 0;
+
+    window.onload = function () {
+      const saved = localStorage.getItem("cartTotal");
+      if (saved) {
+        total = parseInt(saved);
+        document.getElementById("total").textContent = total;
+      }
+    };
+
+    function addToCart(amount) {
+      total += amount;
+      document.getElementById("total").textContent = total;
+      localStorage.setItem("cartTotal", total);
+      console.log("目前總金額: $" + total);
+    }
+
+    function clearCart() {
+      total = 0;
+      document.getElementById("total").textContent = 0;
+      localStorage.removeItem("cartTotal");
+      console.log("購物車已清空");
+    }
+  </script>
+
+</body>
+</html>
